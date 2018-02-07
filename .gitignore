@@ -1,0 +1,12 @@
+.DS_Store
+
+dist/tests/*
+docs/bin/*
+
+node_modules/*
+npm-debug.log
+yarn.lock
+
+.idea/*
+*.iml
+.vscode

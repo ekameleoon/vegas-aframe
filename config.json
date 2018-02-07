@@ -1,0 +1,12 @@
+{
+    "bundle"      : "application" ,
+    "debug"       : true ,
+    "verbose"     : true ,
+    "file"        : "application" ,
+    "header"      : "<%= pkg.description %> - version: <%= pkg.version %> - license: MPL 2.0/GPL 2.0+/LGPL 2.1+ - Follow me on Twitter! @ekameleon" ,
+    "entry"       : "./src/main.js" ,
+    "output"      : "./dist/js/" ,
+    "browserSync" : true ,
+    "sourcemap"   : false ,
+    "server"      : { "baseDir" : "dist" , "index" : "dev.html" }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "vegas-aframe",
+  "description": "The VEGAS JS + AFrame prototype",
+  "version": "1.0.0",
+  "license": "MPL-1.1 OR GPL-2.0+ OR GPL-3.0+",
+  "homepage": "https://github.com/ekameleoon/vegas-aframe",
+  "author": {
+    "name": "Marc Alcaraz",
+    "email": "ekameleon@gmail.com",
+    "url": "https://www.ooopener.com"
+  },
+  "main": "src/main.js",
+  "scripts": {
+    "build": "yarn dev & yarn prod",
+    "dev": "yarn inject-dev && rollup -c --environment MODE:dev",
+    "prod": "yarn inject-prod && rollup -c --environment MODE:prod",
+    "watch": "yarn dev --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "browser-sync start --server . --startPath ",
+    "inject-dev": "mustache package.json html/dev.html > dist/dev.html",
+    "inject-prod": "mustache package.json html/index.html > dist/index.html"
+  },
+  "files": [
+    "package.json",
+    "LICENSE",
+    "README.md",
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0",
+    "mustache": "^2.3.0",
+    "rollup": "^0.54.0",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-babel-minify": "^4.0.0",
+    "rollup-plugin-browsersync": "^0.2.6",
+    "rollup-plugin-cleanup": "^2.0.0",
+    "rollup-plugin-license": "^0.5.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "vegas-js": "^1.0.12"
+  },
+  "bugs": {
+    "url": "https://github.com/ekameleoon/vegas-aframe/issues",
+    "email": "ekameleon@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekameleoon/vegas-aframe.git"
+  },
+  "dependencies": {}
+}
