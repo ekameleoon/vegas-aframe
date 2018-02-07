@@ -59,11 +59,11 @@ $ yarn dev --watch
 $ yarn build
 ```
 
-**Note: ** You can copy the **config.json** file and rename the copy in **user.json** to change your custom build settings.
+Note: You can copy the **config.json** file and rename the copy in **user.json** to change your custom build settings.
 
 #### ⌜ Test the application in your local browser
 
-We use **[browsersync](https://browsersync.io/)** to test locally the application.
+We use [browsersync](https://browsersync.io/) to test locally the application.
 
 ```
 $ yarn dev
