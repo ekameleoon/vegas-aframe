@@ -933,7 +933,7 @@ var ViewList = Object.defineProperties({}, {
 });
 
 var assets = {
-    home_image: { id: "home_image", src: "images/image.min.jpg"
+    home_image: { id: 'home_image', src: 'images/image.min.jpg'
     } };
 
 var camera = {
@@ -1002,49 +1002,10 @@ var sky = {
 };
 
 var home = {
-    home_audio: {
-        src: "url(sounds/home.mp3)",
+    home_sky: './images/image.min.jpg',
+    home_sound: {
+        src: 'url(./sounds/CA01GN02_sound.mp3)',
         volume: 1
-    },
-    home_button: {
-        align: 'center',
-        color: '#FFFFFF',
-        backgroundColor: '#ff6666',
-        radius: 0.08,
-        value: 'Start the experience',
-        font: "kelsonsans",
-        raycasted: true,
-        width: 2.5,
-        height: 0.3
-    },
-    home_button_front: {
-        x: 0,
-        y: -1,
-        z: -4
-    },
-    home_button_back: {
-        side: 'double',
-        rotationY: 180,
-        x: 0,
-        y: -1,
-        z: 4
-    },
-    home_image: {
-        width: 3,
-        height: 1.5,
-        src: "#home_image"
-    },
-    home_image_front: {
-        x: 0,
-        y: 0,
-        z: -4
-    },
-    home_image_back: {
-        side: 'double',
-        rotationY: 180,
-        x: 0,
-        y: 0,
-        z: 4
     },
     home_subtitle: {
         align: 'center',
@@ -1065,7 +1026,7 @@ var home = {
     home_title: {
         align: 'center',
         color: '#FFFFFF',
-        font: "kelsonsans"
+        font: 'kelsonsans'
     },
     home_title_front: {
         x: 0,
@@ -9813,11 +9774,11 @@ var home_button = [{
 }];
 
 var home_container = [{
-    id: "home_container",
+    id: 'home_container',
     type: AEntity,
     singleton: true,
     lazyInit: true,
-    properties: [{ name: "addChild", args: [{ ref: "home_title_back" }] }, { name: "addChild", args: [{ ref: "home_title_front" }] }, { name: "addChild", args: [{ ref: "home_subtitle_back" }] }, { name: "addChild", args: [{ ref: "home_subtitle_front" }] }]
+    properties: [{ name: 'addChild', args: [{ ref: 'home_sound' }] }, { name: 'addChild', args: [{ ref: 'home_title_back' }] }, { name: 'addChild', args: [{ ref: 'home_title_front' }] }, { name: 'addChild', args: [{ ref: 'home_subtitle_back' }] }, { name: 'addChild', args: [{ ref: 'home_subtitle_front' }] }]
 }];
 
 function Image( init = null )
@@ -9872,20 +9833,20 @@ HomeSoundEnded.prototype = Object.create(Receiver.prototype, {
         } }
 });
 
-var home_sounds = [{
-    id: "home_sound",
+var home_sound = [{
+    id: 'home_sound',
     type: Sound,
     singleton: true,
     lazyInit: true,
-    generates: ["home_sound_ended"],
-    properties: [{ name: "#init", config: "home_sound" }]
+    generates: ['home_sound_ended'],
+    properties: [{ name: '#init', config: 'home_sound' }]
 }, {
-    id: "home_sound_ended",
+    id: 'home_sound_ended',
     type: HomeSoundEnded,
     singleton: true,
     lazyInit: true,
-    receivers: [{ signal: "home_sound.finishIt" }],
-    properties: [{ name: "sound", ref: "home_sound2" }]
+    receivers: [{ signal: 'home_sound.finishIt' }],
+    properties: [{ name: 'sound', ref: 'home_sound' }]
 }];
 
 var home_subtitle = [{
@@ -9919,8 +9880,10 @@ var home_title = [{
 function HomeOpenAfter() {
     Task.call(this);
     Object.defineProperties(this, {
-        sky: { writable: true, value: null
-        } });
+        image: { writable: true, value: null },
+        sky: { writable: true, value: null },
+        sound: { writable: true, value: null }
+    });
 }
 HomeOpenAfter.prototype = Object.create(Task.prototype, {
     constructor: { value: HomeOpenAfter, writable: true },
@@ -9928,14 +9891,17 @@ HomeOpenAfter.prototype = Object.create(Task.prototype, {
             this.notifyStarted();
             try {
                 if (!this.sky) throw new Error('sky');
+                if (!this.sound) throw new Error('sound');
             } catch (er) {
-                logger.warning(fastformat(this + " run failed, the {0} reference not must be null.", er.message));
+                logger.warning(fastformat(this + ' run failed, the {0} reference not must be null.', er.message));
                 this.notifyFinished();
                 return;
             }
-            logger.debug(this + " run");
+            logger.debug(this + ' run');
             this.sky.color = '';
-            this.sky.src = "./images/image.min.jpg";
+            this.sky.src = './images/image.min.jpg';
+            logger.info(this.sound);
+            this.sound.play();
             this.notifyFinished();
         } }
 });
@@ -9948,21 +9914,21 @@ var home_close = [{
 }];
 
 var home_open = [{
-    id: "home_open_after",
+    id: 'home_open_after',
     type: HomeOpenAfter,
     singleton: true,
     lazyInit: true,
-    properties: [{ name: "sky", ref: "sky" }]
+    properties: [{ name: 'image', config: 'home_sky' }, { name: 'sky', ref: 'sky' }, { name: 'sound', ref: 'home_sound' }]
 }];
 
 var home_view = [{
-    id: "home_view",
+    id: 'home_view',
     type: SceneView,
     singleton: true,
     lazyInit: true,
-    properties: [{ name: "openAfter", ref: "home_open_after" }, { name: "container", ref: "home_container" }, { name: "scene", ref: "scene" }]
+    properties: [{ name: 'openAfter', ref: 'home_open_after' }, { name: 'container', ref: 'home_container' }, { name: 'scene', ref: 'scene' }]
 }].concat(
-home_button, home_container, home_image, home_sounds, home_subtitle, home_title,
+home_button, home_container, home_image, home_sound, home_subtitle, home_title,
 home_close, home_open);
 
 var views = [].concat(home_view);

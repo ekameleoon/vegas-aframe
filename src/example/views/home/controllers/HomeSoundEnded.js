@@ -3,7 +3,7 @@
 import { fastformat } from 'core/strings/fastformat.js' ;
 import { Receiver }   from 'system/signals/Receiver.js' ;
 
-import { logger } from '../../../logging/logger.js' ;
+import { logger } from '@app/logging/logger.js' ;
 
 /**
  * This receiver is invoked when signal is emitted.

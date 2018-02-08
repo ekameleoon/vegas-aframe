@@ -64,7 +64,7 @@ HomeCloseAfter.prototype = Object.create( Task.prototype ,
 
         ///////////
 
-        // this.sound.play() ;
+        // this.sound.stop() ;
 
         this.notifyFinished() ;
     }}
