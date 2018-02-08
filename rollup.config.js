@@ -108,7 +108,7 @@ else
             notify    : false ,
             logPrefix : setting.bundle ,
             server    : setting.server ,
-            port      : 4000
+            port      : setting.port
         })) ;
     }
 }

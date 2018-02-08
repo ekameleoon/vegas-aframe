@@ -8,5 +8,6 @@
     "output"      : "./dist/js/" ,
     "browserSync" : true ,
     "sourcemap"   : false ,
-    "server"      : { "baseDir" : "dist" , "index" : "dev.html" }
+    "server"      : { "baseDir" : "dist" , "index" : "dev.html" },
+    "port"        : 4000
 }

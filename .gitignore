@@ -1,5 +1,7 @@
 .DS_Store
 
+user.json
+
 dist/tests/*
 docs/bin/*
 
