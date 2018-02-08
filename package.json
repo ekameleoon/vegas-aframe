@@ -11,7 +11,7 @@
   },
   "main": "src/main.js",
   "scripts": {
-    "build": "yarn dev & yarn prod",
+    "build": "yarn dev --environment build && yarn prod --environment build",
     "dev": "yarn inject-dev && rollup -c --environment MODE:dev",
     "prod": "yarn inject-prod && rollup -c --environment MODE:prod",
     "watch": "yarn dev --watch",
